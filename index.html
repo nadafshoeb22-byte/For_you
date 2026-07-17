@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>For Fiza ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App shell: fixed phone-sized canvas, everything lives inside this frame -->
+  <div class="app-frame" id="appFrame">
+
+    <!-- ============================================================
+         HOME PAGE
+    ============================================================= -->
+    <section class="screen active" id="page-home" data-page="home">
+      <div class="bg-layer" style="background-image:url('images/photo1.jpg')"></div>
+      <div class="overlay overlay-dark"></div>
+
+      <div class="screen-content center-content">
+        <div class="glass-card home-card reveal-up">
+          <p class="eyebrow">for you, always</p>
+          <h1 class="home-title">Hey Meri Jaan <span class="heart-pop">❤️</span></h1>
+          <p class="home-sub">Kaise ho?</p>
+          <button class="btn-primary ripple-btn" id="startSurpriseBtn">
+            <span>Start Surprise</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LOVE PAGE
+    ============================================================= -->
+    <section class="screen" id="page-love" data-page="love">
+      <div class="bg-layer bg-blur" style="background-image:url('images/photo2.jpg')"></div>
+      <div class="overlay overlay-soft"></div>
+
+      <!-- floating hearts container (populated by JS) -->
+      <div class="floating-hearts" id="loveHearts"></div>
+
+      <div class="screen-content center-content">
+        <div class="glass-card love-card reveal-up">
+          <p class="eyebrow">a little note</p>
+          <p class="typing-text" id="loveTypingText"></p>
+          <div class="nav-row">
+            <button class="btn-ghost" id="lovePrevBtn">‹ Previous</button>
+            <button class="btn-ghost" id="loveNextBtn">Next ›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LETTER PAGE
+    ============================================================= -->
+    <section class="screen" id="page-letter" data-page="letter">
+      <div class="overlay overlay-plain"></div>
+
+      <div class="screen-content center-content">
+        <div class="envelope-wrap" id="envelopeWrap">
+
+          <!-- Envelope (click to open) -->
+          <div class="envelope" id="envelope">
+            <div class="envelope-back"></div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-body"></div>
+            <div class="envelope-seal">❤</div>
+          </div>
+
+          <!-- Letter paper, slides out from behind envelope -->
+          <div class="letter-paper" id="letterPaper">
+            <div class="paper-texture"></div>
+            <p class="letter-heading">My Fiza,</p>
+            <p class="letter-text" id="letterTypedText"></p>
+            <p class="letter-sign">— always yours</p>
+          </div>
+
+          <p class="tap-hint" id="envelopeHint">tap the envelope to open</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VOICE PAGE
+    ============================================================= -->
+    <section class="screen" id="page-voice" data-page="voice">
+      <div class="overlay overlay-plain"></div>
+
+      <div class="screen-content center-content">
+        <div class="glass-card voice-card reveal-up">
+          <p class="eyebrow">just for your ears</p>
+          <div class="vinyl" id="vinyl">
+            <div class="vinyl-hole"></div>
+          </div>
+
+          <!-- animated waveform -->
+          <div class="waveform" id="waveform"></div>
+
+          <div class="progress-wrap">
+            <span class="time-label" id="timeCurrent">0:00</span>
+            <div class="progress-track" id="progressTrack">
+              <div class="progress-fill" id="progressFill"></div>
+              <div class="progress-knob" id="progressKnob"></div>
+            </div>
+            <span class="time-label" id="timeTotal">0:00</span>
+          </div>
+
+          <button class="play-btn ripple-btn" id="playPauseBtn">
+            <svg id="iconPlay" viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+            <svg id="iconPause" viewBox="0 0 24 24" width="26" height="26" style="display:none"><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          </button>
+
+          <audio id="voiceAudio" src="audio/voice.mp3" preload="auto"></audio>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SURPRISE PAGE
+    ============================================================= -->
+    <section class="screen" id="page-surprise" data-page="surprise">
+      <div class="bg-layer bg-zoom" id="surpriseBg" style="background-image:url('images/photo1.jpg')"></div>
+      <div class="overlay overlay-cinematic"></div>
+
+      <!-- canvas for particles: stars + gold sparks + confetti -->
+      <canvas id="particleCanvas"></canvas>
+      <div class="floating-hearts" id="surpriseHearts"></div>
+
+      <div class="screen-content center-content">
+        <div class="surprise-content">
+          <h1 class="surprise-title" id="surpriseTitle">
+            <span class="word">Get</span>
+            <span class="word">Well</span>
+            <span class="word">Soon</span>
+            <span class="word">Fiza</span>
+            <span class="word">❤️</span>
+          </h1>
+          <p class="surprise-message" id="surpriseMessage"></p>
+          <p class="surprise-credit">Made with ❤️ by Shoeb</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BOTTOM NAVIGATION (floating glass, Instagram-style)
+    ============================================================= -->
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="nav-btn active" data-target="home" aria-label="Home">
+        <span class="nav-icon">🏠</span>
+      </button>
+      <button class="nav-btn" data-target="love" aria-label="Love">
+        <span class="nav-icon">❤️</span>
+      </button>
+      <button class="nav-btn" data-target="letter" aria-label="Letter">
+        <span class="nav-icon">💌</span>
+      </button>
+      <button class="nav-btn" data-target="voice" aria-label="Voice">
+        <span class="nav-icon">🎙</span>
+      </button>
+      <button class="nav-btn" data-target="surprise" aria-label="Surprise">
+        <span class="nav-icon">🎁</span>
+      </button>
+      <div class="nav-glow-indicator" id="navGlow"></div>
+    </nav>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
